@@ -11,6 +11,9 @@ const todoSchema = new mongoose.Schema({
     },
     date : {
         type : String
+    },
+    checked : {
+        type : Boolean
     }
 })
 

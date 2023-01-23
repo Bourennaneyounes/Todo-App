@@ -12,8 +12,8 @@ router.get('/', async (req,res) => {
 // Create ToDo
 router.post('/createToDo', (req,res) => {
     const {title,description,date} = req.body
-  
-    ToDoModel.create({title,description,date}).then((data)=>{
+    const checked = false
+    ToDoModel.create({title,description,date,checked}).then((data)=>{
 
         console.log("created with success")
         console.log(data)
@@ -36,6 +36,13 @@ router.post('/deleteToDo', (req,res) => {
 
     ToDoModel.findByIdAndDelete(_id).then(()=>{
         res.send("delete with success")
+    }).catch((err) => console.log(err))
+})
+
+router.post('/checkToDo', (req,res) => {
+    const {_id,checked} = req.body
+    ToDoModel.findByIdAndUpdate(_id,{checked}).then((data)=>{
+        res.send(data)
     }).catch((err) => console.log(err))
 })
 module.exports = router
