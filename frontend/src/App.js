@@ -1,6 +1,6 @@
 import {  useEffect, useState } from "react";
 import ToDo from "./components/ToDoComponent";
-import { getAllToDo, addToDo, updateToDo, deleteToDo } from "./utils/handleApi";
+import { getAllToDo, addToDo, updateToDo, deleteToDo,checkToDo } from "./utils/handleApi";
 
 
 function App() {
@@ -42,6 +42,8 @@ function App() {
           <ToDo 
               key={item._id} 
               title={item.title} 
+              isChecked={item.checked}
+              checkToDo={() => checkToDo(item._id,!item.checked,setToDo)}
               changeToUpdate={() => changeToUpdate(item._id,item.title,item.description,item.date)} 
               deleteToDo ={ () => deleteToDo(item._id,setToDo)}/>)}
         </div>

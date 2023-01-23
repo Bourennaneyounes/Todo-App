@@ -34,4 +34,12 @@ const deleteToDo = (toDoId,setToDo) => {
 
 }
 
-export {getAllToDo, addToDo, updateToDo,deleteToDo}
+const checkToDo = (toDoId,checked,setToDo) => {
+    axios.post(baseUrl+"/checkToDo",{_id :toDoId,checked}).then(()=>{
+        getAllToDo(setToDo)
+        // setIsChecked(true)
+    }).catch((err)=>console.log(err))
+
+}
+
+export {getAllToDo, addToDo, updateToDo,deleteToDo,checkToDo}

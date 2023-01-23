@@ -6,6 +6,10 @@
 }
 .title{
     padding: 5px;
+    /* background-color: red; */
+}
+.checked {
+    text-decoration: line-through;
 }
 .icon{
     padding: 5px;
