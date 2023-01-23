@@ -1,0 +1,12 @@
+.todo{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 50px; */
+}
+.title{
+    padding: 5px;
+}
+.icon{
+    padding: 5px;
+}
