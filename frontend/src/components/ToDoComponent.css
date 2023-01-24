@@ -2,6 +2,8 @@
     width: 300px;
     display: flex;
     justify-content: space-between;
+    background-color: red;
+    padding: 20px;
     /* margin-top: 50px; */
 }
 .title{
