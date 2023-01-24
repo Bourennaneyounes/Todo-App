@@ -57,7 +57,9 @@ export default function Home() {
           
           <ToDo 
               key={item._id} 
-              title={item.title} 
+              title={item.title}
+              description={item.description}
+              date = {item.date} 
               isChecked={item.checked}
               checkToDo={() => checkToDo(user._id,item._id,!item.checked,setToDo)}
               changeToUpdateMode={() => changeToUpdate(item._id,item.title,item.description,item.date)} 
@@ -75,7 +77,7 @@ export default function Home() {
                     onChange={(e) => {setToDoInfo({...toDoInfo,description : e.target.value})}}
                     />
           
-          <input type="text" placeholder="due date" 
+          <input type="date" placeholder="due date" 
                  value={toDoInfo.date} 
                  onChange={(e) => {setToDoInfo({...toDoInfo,date : e.target.value})}}
                  />

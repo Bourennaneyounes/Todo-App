@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useSignUp,useLogout,useLogin } from '../utils/handleApi'
 
+import './Auth.css'
 
 export default function Auth() {
 
@@ -44,7 +45,7 @@ export default function Auth() {
 
     
   return (
-    <div>
+    <div className='card'>
         {user !==null && (
             <h1>Authentication {user.email}  </h1>
         )}
@@ -54,32 +55,32 @@ export default function Auth() {
         {user===null && (
             <form className='auth' onSubmit={signUpSubmit}>
         
-            <label>signup</label>
-            <input type="text" placeholder="email" value={emailSignUp} onChange={((e)=> setEmailSignUp(e.target.value))} />
-            
-           
-                <button >SignUp</button>
+            {/* <label>signup</label> */}
+            <input type="email" placeholder="email" value={emailSignUp} onChange={((e)=> setEmailSignUp(e.target.value))} />
+            <button className='button'>SignUp</button>
            
             
         </form>
         
         )}
+        <div className='line'></div>
+        <label className='label'>Already have account ? login</label>
         {user===null && (
             <form className='auth' onSubmit={loginSubmit}>
     
-            <label>login</label>
-            <input type="text" placeholder="email" value={emailLogin} onChange={((e)=> setEmailLogin(e.target.value))} />
+            {/* <label>login</label> */}
+            <input type="email" placeholder="email" value={emailLogin} onChange={((e)=> setEmailLogin(e.target.value))} />
             
-                    <button>Login</button>
+            <button className='button'>Login</button>
             
             </form>
         
         )}
         {user!==null && (
-                <button onClick={logoutSubmit}>LogOUT</button>
+                <button className='button' onClick={logoutSubmit}>LogOUT</button>
             )}
         {user!==null && (
-                <button onClick={navigate('/todos')}>Goto Todos</button>
+                <button className='button'  onClick={navigate('/todos')}>Goto Todos</button>
             )}
 
     

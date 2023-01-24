@@ -14,13 +14,24 @@
   .container {
     display: flex;
     justify-content: space-around;
+    margin-top: 50px;
   }
   .add-todo{
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-around;
+    height: 300px;
+    width: 200px;
     gap: 10px;
+    border: 0.1rem solid rgb(170, 170, 170);
+    border-radius: 0.5rem;
+    background-color: #f9f9f9;
+    box-shadow: 0 3px 10px #272727;
+    padding: 30px 30px;
     
+  }
+  input{
+    margin-bottom: 30px;
   }
   
   .todo-list{
@@ -28,5 +39,10 @@
     flex-direction: column;
     justify-content: start;
     gap: 10px;
+    /* background-color: black; */
     
+  }
+
+  h3{
+    align-self: center;
   }

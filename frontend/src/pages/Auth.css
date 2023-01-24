@@ -1,0 +1,46 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+    height: 300px;
+    margin:  50px auto;
+    border: 0.1rem solid rgb(170, 170, 170);
+    border-radius: 0.5rem;
+    background-color: #f9f9f9;
+    box-shadow: 0 3px 10px #272727;
+}
+
+.auth{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    width: 200px;
+    gap: 20px;
+}
+
+label{
+    text-align: center;
+}
+
+button{
+    background-color: black;
+    color: white;
+    width : 40%;
+    margin: auto ;
+    padding: 10px;
+    border-radius: 3rem;
+}
+
+.line{
+    /* height: 1px; */
+    padding: 0.01rem 120px;
+    background-color: black;
+    
+}
+.label{
+    margin-bottom: 20px;
+    font-size: small;
+}
