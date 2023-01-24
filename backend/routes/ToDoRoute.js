@@ -1,16 +1,17 @@
 const {Router} = require("express")
 const ToDoModel = require("../models/ToDoModel")
 const router = Router()
+const verifyToken = require('../middleware/isLoggedIn')
 
 // get all ToDos
-router.get('/', async (req,res) => {
+router.get('/' ,verifyToken,async (req,res) => {
     const ToDo = await ToDoModel.find()
     res.send(ToDo)
 
 })
 
 // Create ToDo
-router.post('/createToDo', (req,res) => {
+router.post('/createToDo', verifyToken, (req,res) => {
     const {title,description,date} = req.body
     const checked = false
     ToDoModel.create({title,description,date,checked}).then((data)=>{
@@ -21,7 +22,7 @@ router.post('/createToDo', (req,res) => {
     }) })
 
 // Update ToDo
-router.post('/updateToDo', (req,res) => {
+router.post('/updateToDo',verifyToken, (req,res) => {
     const {_id, title, description, date} = req.body
 
     ToDoModel.findByIdAndUpdate(_id, {title,description,date}).then(()=>{
@@ -31,7 +32,7 @@ router.post('/updateToDo', (req,res) => {
 } )
 
 //Delete ToDo
-router.post('/deleteToDo', (req,res) => {
+router.post('/deleteToDo',verifyToken ,(req,res) => {
     const {_id} = req.body
 
     ToDoModel.findByIdAndDelete(_id).then(()=>{
@@ -39,7 +40,7 @@ router.post('/deleteToDo', (req,res) => {
     }).catch((err) => console.log(err))
 })
 
-router.post('/checkToDo', (req,res) => {
+router.post('/checkToDo',verifyToken ,(req,res) => {
     const {_id,checked} = req.body
     ToDoModel.findByIdAndUpdate(_id,{checked}).then((data)=>{
         res.send(data)

@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const cors = require("cors")
 const bodyParser = require('body-parser')
 
-const routes = require('./routes/ToDoRoute')
+const toDoRoutes = require('./routes/ToDoRoute')
+const userRoutes = require('./routes/UserRoute')
 
 require('dotenv').config()
 
@@ -19,5 +20,6 @@ app.use(cors())
 
 mongoose.connect(process.env.MONGODB_URL).then(()=> console.log('connected to mongodb')).catch((err) => console.log(err))
 
-app.use(routes)
+app.use(toDoRoutes)
+app.use(userRoutes)
 app.listen(PORT , () => console.log('listening on ' + PORT))
