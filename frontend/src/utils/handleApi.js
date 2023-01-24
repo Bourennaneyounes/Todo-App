@@ -3,46 +3,52 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 const baseUrl = "http://localhost:5000"
 
-const getAllToDo = (setToDo,token) => {
+const getAllToDo = (owner,setToDo,token) => {
     axios.interceptors.request.use(req => {
         req.headers.authorization = token;
+        
         return req;
       });
+      
     
-    axios.get(baseUrl).then((data) => {
+    axios.get(baseUrl+'/'+owner).then((data) => {
         setToDo(data.data)
     })
 }
 
-const addToDo = (title,description,date,setToDoInfo,setToDo) => {
-    axios.post(baseUrl+"/createToDo",{title,description,date}).then(()=>{
+const addToDo = (owner,title,description,date,setToDoInfo,setToDo) => {
+    // console.log(owner);
+    axios.post(baseUrl+"/createToDo",{owner,title,description,date}).then(()=>{
         setToDoInfo({})
-        getAllToDo(setToDo)
+        getAllToDo(owner,setToDo)
 
     })
 
 }
 
-const updateToDo = (toDoId,title,description,date,setToDoInfo,setToDo,setIsUpdating) => {
+const updateToDo = (owner,toDoId,title,description,date,setToDoInfo,setToDo,setIsUpdating) => {
+    
     axios.post(baseUrl+"/updateToDo",{_id:toDoId,title,description,date}).then(()=>{
+        
         setToDoInfo({})
+        
         setIsUpdating(false)
-        getAllToDo(setToDo)
-
+        getAllToDo(owner,setToDo)
+        
     }).catch((err)=>console.log(err))
 
 }
 
-const deleteToDo = (toDoId,setToDo) => {
+const deleteToDo = (owner,toDoId,setToDo) => {
     axios.post(baseUrl+"/deleteToDo",{_id :toDoId}).then(()=>{
-        getAllToDo(setToDo)
+        getAllToDo(owner,setToDo)
     }).catch((err)=>console.log(err))
 
 }
 
-const checkToDo = (toDoId,checked,setToDo) => {
+const checkToDo = (owner,toDoId,checked,setToDo) => {
     axios.post(baseUrl+"/checkToDo",{_id :toDoId,checked}).then(()=>{
-        getAllToDo(setToDo)
+        getAllToDo(owner,setToDo)
         // setIsChecked(true)
     }).catch((err)=>console.log(err))
 

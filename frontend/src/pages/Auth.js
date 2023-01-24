@@ -24,7 +24,7 @@ export default function Auth() {
         await signUp(emailSignUp)
 
         navigate('/todos')
-        console.log(emailSignUp)
+        // console.log(emailSignUp)
     }
 
     const logoutSubmit = async (e) =>{
@@ -39,7 +39,7 @@ export default function Auth() {
         // console.log(user.token)
         await login(emailLogin)
         navigate('/todos')
-        console.log(emailLogin)
+        // console.log(emailLogin)
     }
 
     

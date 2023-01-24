@@ -21,6 +21,7 @@ export default function Home() {
     
     const [toDo,setToDo] = useState([])
     const [toDoInfo,setToDoInfo] = useState({
+      owner:"",
       title:"",
       description:"",
       date:""
@@ -31,7 +32,7 @@ export default function Home() {
   
     
   
-    useEffect(() => { if(user) getAllToDo(setToDo,user.token)}, [user])
+    useEffect(() => { if(user) getAllToDo(user._id,setToDo,user.token)}, [user])
     
    
     const changeToUpdate = (_id,title,description,date) => {
@@ -58,9 +59,9 @@ export default function Home() {
               key={item._id} 
               title={item.title} 
               isChecked={item.checked}
-              checkToDo={() => checkToDo(item._id,!item.checked,setToDo)}
-              changeToUpdate={() => changeToUpdate(item._id,item.title,item.description,item.date)} 
-              deleteToDo ={ () => deleteToDo(item._id,setToDo)}
+              checkToDo={() => checkToDo(user._id,item._id,!item.checked,setToDo)}
+              changeToUpdateMode={() => changeToUpdate(item._id,item.title,item.description,item.date)} 
+              deleteToDo ={ () => deleteToDo(user._id,item._id,setToDo)}
               />)}
         </div>
         <div className="add-todo">
@@ -80,10 +81,16 @@ export default function Home() {
                  />
           
           <button onClick={
-                  isUpdating ? () => updateToDo(toDoId,toDoInfo.title,toDoInfo.description,toDoInfo.date,setToDoInfo,setToDo,setIsUpdating)
-                             : () => addToDo(toDoInfo.title,toDoInfo.description,toDoInfo.date,setToDoInfo,setToDo)}>
+                  isUpdating ? () => updateToDo(user._id,toDoId,toDoInfo.title,toDoInfo.description,toDoInfo.date,setToDoInfo,setToDo,setIsUpdating)
+                             : () => addToDo(user._id,toDoInfo.title,toDoInfo.description,toDoInfo.date,setToDoInfo,setToDo)}>
                               {isUpdating ? "update" : "add"}
                               </button>
+            {isUpdating && (
+                <button onClick={() => setIsUpdating(false)}>
+                              cancel
+                              </button>
+            )}
+          
         </div>
       </div>
     </div>
