@@ -8,10 +8,10 @@ import './Home.css'
 
 export default function Home() {
 
-    /////////////////////////////////////////////////
+    
     const dragItem = useRef();
   const dragOverItem = useRef();
-//   const [list, setList] = useState(['Item 1','Item 2','Item 3','Item 4','Item 5','Item 6']);
+
 const dragStart = (e, position) => {
     dragItem.current = position;
     console.log(e.target.innerHTML);
@@ -31,7 +31,7 @@ const dragStart = (e, position) => {
     dragOverItem.current = null;
     setToDo(copyListItems);
   };
-    ////////////////////////////////////////////////
+    
     const {user} = useAuthContext()
     const navigate = useNavigate()
     const {logout} = useLogout()
@@ -40,7 +40,7 @@ const dragStart = (e, position) => {
         await logout()
 
         navigate('/')
-        // console.log(emailSignUp)
+      
     }
     
     const [toDo,setToDo] = useState([])
@@ -101,22 +101,6 @@ const dragStart = (e, position) => {
       ))}
     </div>
         
-        {/* {
-          toDo.map((item) => 
-          <div className="draggable" draggable>
-              <ToDo 
-              key={item._id} 
-              title={item.title}
-              description={item.description}
-              date = {item.date} 
-              isChecked={item.checked}
-              checkToDo={() => checkToDo(user._id,item._id,!item.checked,setToDo)}
-              changeToUpdateMode={() => changeToUpdate(item._id,item.title,item.description,item.date)} 
-              deleteToDo ={ () => deleteToDo(user._id,item._id,setToDo)}
-              
-              />
-          </div>
-          )} */}
         </div>
         <div className="add-todo">
           <input type="text" placeholder="title" 

@@ -57,7 +57,7 @@ export default function Auth() {
     
             <input type="email" placeholder="email" value={emailSignUp} onChange={((e)=> setEmailSignUp(e.target.value))} />
             <button disabled={isLoading} className='button'>SignUp</button>
-            {errorSignUp===null && ( <div className='error'>{errorSignUp }</div>)}
+            {errorSignUp!==null && ( <div className='error'>{errorSignUp }</div>)}
             
         </form>
         
@@ -71,7 +71,7 @@ export default function Auth() {
             <input type="email" placeholder="email" value={emailLogin} onChange={((e)=> setEmailLogin(e.target.value))} />
             
             <button className='button'>Login</button>
-            {errorLogin && ( <div className='error'>{errorLogin}</div>)}
+            {errorLogin!==null && ( <div className='error'>{errorLogin}</div>)}
             
             </form>
         
