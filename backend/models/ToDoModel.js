@@ -16,6 +16,10 @@ const todoSchema = new mongoose.Schema({
     },
     checked : {
         type : Boolean
+    },
+    order:{
+        type: Number,
+        default:0
     }
 })
 

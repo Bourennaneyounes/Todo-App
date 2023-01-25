@@ -13,7 +13,7 @@ router.post('/signUp', async (req,res) => {
           }
       
           // check if user already exist
-          // Validate if user exist in our database
+         
           const oldUser = await UserModel.findOne({ email });
       
           if (oldUser) {
@@ -30,29 +30,24 @@ router.post('/signUp', async (req,res) => {
                   expiresIn: "2h",
                 }
               );
-              console.log(user);
               // save user token
               user.token = token;
     
-            // console.log("user created with success")
-            // console.log(user);
-            // return new user
+           
             res.status(201).json(user);
-            // res.send(JSON.stringify(user))
+          
         })
     }catch (err) {
         console.log(err);
       }
-    
-        // console.log(data)
-        // res.send(data)
+
     })
     
-// Create ToDo
+
 router.post('/login', async (req,res) => {
-// Our login logic starts here
+
 try {
-    // Get user input
+    
     const { email } = req.body;
 
     // Validate user input
@@ -72,14 +67,14 @@ try {
         }
       );
 
-      // save user token
+     
       user.token = token;
 
-      // user
-      res.status(200).json(user);
+      
+      return res.status(200).json(user);
     }
-    // res.setHeader(name, value)
-    // res.status(400).send("Invalid Credentials");
+    
+    return res.status(400).send("Invalid Credentials");
   } catch (err) {
     console.log(err);
   }
