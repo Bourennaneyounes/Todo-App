@@ -1,10 +1,11 @@
 .todo{
-    width: 300px;
+    width: 450px;
     display: flex;
     justify-content: space-between;
     background-color: black;
     color: white;
-    padding: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 3rem;
     font-size: large;
     /* margin-top: 50px; */
@@ -26,30 +27,4 @@
     font-size: 0.2cm;
 }
 
-/* .popup-content {
-    margin: auto;
-    background: rgb(13, 12, 12);
-    width: 90%;
-    padding: 5px;
-  } */
 
-  .popup-content {
-    margin: auto;
-    background: rgb(255, 255, 255);
-    width: 50%;
-    padding: 5px;
-  }
-  .popup-arrow {
-    color: rgb(255, 255, 255);
-  }
-  [role='tooltip'].popup-content {
-    width: 200px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
-  }
-  
-  .popup-overlay {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  [data-popup='tooltip'].popup-overlay {
-    background: transparent;
-  }

@@ -13,34 +13,33 @@ export default function Auth() {
     
     const [emailSignUp,setEmailSignUp] = useState("")
     const [emailLogin,setEmailLogin] = useState("")
-
-    const {signUp} = useSignUp()
+    
+    const {signUp,errorSignUp,isLoading} = useSignUp()
     const {logout} = useLogout()
-    const {login} = useLogin()
-
+    const {login,errorLogin} = useLogin()
+    
     const navigate = useNavigate()
-
+    
     const signUpSubmit = async (e) =>{
         e.preventDefault()
         await signUp(emailSignUp)
+ 
+         if(errorSignUp!==null) navigate('/todos')
 
-        navigate('/todos')
-        // console.log(emailSignUp)
     }
 
     const logoutSubmit = async (e) =>{
         e.preventDefault()
         await logout()
-        navigate('/')
-        // console.log(emailSignUp)
+         navigate('/')
+     
     }
     
     const loginSubmit = async (e) =>{
         e.preventDefault()
-        // console.log(user.token)
         await login(emailLogin)
-        navigate('/todos')
-        // console.log(emailLogin)
+        if(errorLogin!==null) navigate('/todos')
+      
     }
 
     
@@ -55,10 +54,10 @@ export default function Auth() {
         {user===null && (
             <form className='auth' onSubmit={signUpSubmit}>
         
-            {/* <label>signup</label> */}
+    
             <input type="email" placeholder="email" value={emailSignUp} onChange={((e)=> setEmailSignUp(e.target.value))} />
-            <button className='button'>SignUp</button>
-           
+            <button disabled={isLoading} className='button'>SignUp</button>
+            {errorSignUp===null && ( <div className='error'>{errorSignUp }</div>)}
             
         </form>
         
@@ -68,10 +67,11 @@ export default function Auth() {
         {user===null && (
             <form className='auth' onSubmit={loginSubmit}>
     
-            {/* <label>login</label> */}
+    
             <input type="email" placeholder="email" value={emailLogin} onChange={((e)=> setEmailLogin(e.target.value))} />
             
             <button className='button'>Login</button>
+            {errorLogin && ( <div className='error'>{errorLogin}</div>)}
             
             </form>
         

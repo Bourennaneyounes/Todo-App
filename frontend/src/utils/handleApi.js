@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const baseUrl = "http://localhost:5000"
@@ -17,7 +18,7 @@ const getAllToDo = (owner,setToDo,token) => {
 }
 
 const addToDo = (owner,title,description,date,setToDoInfo,setToDo) => {
-    // console.log(owner);
+   
     axios.post(baseUrl+"/createToDo",{owner,title,description,date}).then(()=>{
         setToDoInfo({})
         getAllToDo(owner,setToDo)
@@ -49,56 +50,67 @@ const deleteToDo = (owner,toDoId,setToDo) => {
 const checkToDo = (owner,toDoId,checked,setToDo) => {
     axios.post(baseUrl+"/checkToDo",{_id :toDoId,checked}).then(()=>{
         getAllToDo(owner,setToDo)
-        // setIsChecked(true)
+      
     }).catch((err)=>console.log(err))
 
 }
 
 export const useSignUp = () => {
-
+    const [errorSignUp,setErrorSignUp] = useState(null)
+    const [isLoading,setIsLoading] = useState(null)
     const {dispatch} = useAuthContext()
-    // console.log(dispatch)
+  
     const signUp = async (email) =>{
+        setIsLoading(true)
+        setErrorSignUp(null)
         await axios.post(baseUrl+"/signUp",{email}).then((data)=>{
-            // getAllToDo(setToDo)
-            // setIsChecked(true)
-            // console.log(data.data);
+        
             localStorage.setItem('user', JSON.stringify(data.data))
-    
+            
             dispatch({type:'LOGIN', payload : data.data})
-        }).catch((err)=>console.log(err))
+            setIsLoading(false)
+        }).catch(async(err)=>{
+            if(err.response.status){
+                setIsLoading(false)
+                await setErrorSignUp(err.response.data)
+            } 
+           console.log(errorSignUp);
+        })
 
         
     }
-    return {signUp}
+    return {signUp,errorSignUp,isLoading}
 
 }
 
 export const useLogin = () => {
-
+    const [errorLogin,setErrorLogin] = useState(null)
     const {dispatch} = useAuthContext()
-    // console.log(dispatch)
+
     const login = async (email) =>{
-        // console.log(token)
+       
         await axios.post(baseUrl+"/login",{email}).then((data)=>{
-            // getAllToDo(setToDo)
-            // setIsChecked(true)
-            // console.log(data.data);
+      
             localStorage.setItem('user', JSON.stringify(data.data))
     
             dispatch({type:'LOGIN', payload : data.data})
-        }).catch((err)=>console.log(err))
+        }).catch(async(err)=>{
+            if(err.response.status){
+               await setErrorLogin(err.response.data)
+            } 
+           
+        })
 
         
     }
-    return {login}
+    return {login,errorLogin}
 
 }
 
 export const useLogout = () => {
 
     const {dispatch} = useAuthContext()
-    // console.log(dispatch)
+  
     const logout = async (email) =>{
         localStorage.removeItem('user')
     

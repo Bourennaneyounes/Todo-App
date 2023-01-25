@@ -1,11 +1,10 @@
 .card{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     gap: 10px;
-    width: 50%;
-    height: 300px;
+    width: 25%;
+    height: 450px;
     margin:  50px auto;
     border: 0.1rem solid rgb(170, 170, 170);
     border-radius: 0.5rem;
@@ -16,7 +15,6 @@
 .auth{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     width: 200px;
     gap: 20px;
 }
